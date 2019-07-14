@@ -170,7 +170,7 @@ def user_data_selection():
                 if usermonth in ['january', 'february', 'march', 'april', 'may', 'june']:
                     break
                 elif usermonth in ['july', 'august', 'september', 'october', 'november', 'december']:
-                    print('\n,{} \'s data is not available.'.format(usermonth))
+                    print('\n,{} \'s data is not available. Please make a new selection.'.format(usermonth))
                     continue
                 elif usermonth == "all":
                     break
