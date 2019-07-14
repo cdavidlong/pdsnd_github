@@ -243,6 +243,8 @@ df = load_data(usersel)
 end = time.time()
 print('\nThat took: ' + str(end - start) + 'seconds to load the dataframe.')
 
+# There follows a series of statistical results derived from the loaded dataset
+
 # Most popular day for a journey in the requested period
 print('\nMost popular day for journeys in: ' + str(usersel[0]).title() + '\n')
 print('During the period: ')
@@ -276,7 +278,7 @@ end = time.time()
 print('\nThat took: ' + str(end - start) + 'seconds to execute.')
 
 # Age mean and median of riders during  the requested period
-# Chck city as the Washington data set does not provide a 'Birth Year' column
+# Check city as the Washington data set does not provide a 'Birth Year' column
 if usersel[0] != "washington":
     start = time.time()
     # Fill in any NaN values for Birth Year with the mean
@@ -295,5 +297,5 @@ print('\nThe most popular station to end a journey for this period was: ' + str(
 end = time.time()
 print('\nThat took: ' + str(end - start) + 'seconds to execute.')
 
-# Prompt user if they would like to see raw data, 5 records at at time
+# Prompt user if they would like to see raw data, 5 records at at time, exit if the answer is No.
 display_raw_data(df, 5)
