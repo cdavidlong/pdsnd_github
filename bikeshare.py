@@ -116,6 +116,27 @@ def load_data(userselection):
     return df
 
 
+
+def getParam(question, invalidMessage, validator):
+    """ Get input from user to a stated question
+    INPUT:
+    question: string
+    invalidMessage: string
+    validator: lambda function
+    OUTPUT:
+    city: string
+    """
+    while True:
+        try:
+            answer = input(question).lower()
+            if validator(answer):
+                return answer
+            else:
+                print(invalidMessage.format(answer))
+        except ValueError as error:
+            print('Exception occurred:{}'.format(error))
+
+
 def user_data_selection():
     """ Prompts user for the city to analyze, the month, the day of the week and accepts 'all' as month and day also
     INPUT:
@@ -130,31 +151,19 @@ def user_data_selection():
     print('\nHello and welcome to the bikeshare data anayzer!\n\nLet\'s explore some US bikeshare data.')
 
     # Prompt user for the city to analyze
-    while True:
-        try:
-            city = input('\nWould you like to see data for Chicago, New York or Washington?\n').lower()
-            if city not in CITY_DATA:
-                print('\nSorry,{} is not a valid city.\n\nPlease choose again by entering either Chicago, New York City OR Washington.'.format(city))
-                continue
-            else:
-                break
-        except ValueError as error:
-            print('Exception occurred:{}'.format(error))
+    city = getParam(
+        '\nWould you like to see data for Chicago, New York or Washington?',
+        '\nSorry,{} is not a valid city.\n\nPlease choose again by entering either Chicago, New York City OR Washington.',
+        lambda v: v in CITY_DATA
+    )
 
-    # Prompt user for time period to filter by
-    while True:
-        try:
-            userfilter = input('\nWould you like to filter the data by month, day, both, or not at all?\nType \'none\' for no time period filter, and \'both\' to choose a month and a day.\n').lower()
-            if userfilter in['day', 'month', 'both', 'none']:
-                break
-            else:
-                print('\nSorry,{} is not a valid selection'.format(userfilter))
-                continue
-        except ValueError as error:
-            print('Exception occurred:{}'.format(error))
+    # Prompt user for time period to analyze
+    userfilter = getParam(
+        '\nWould you like to filter the data by month, day, both, or not at all?\nType \'none\' for no time period filter, and \'both\' to choose a month and a day.\n',
+        '\nSorry,{} is not a valid selection',
+        lambda v: v in ['day', 'month', 'both', 'none'])
 
-    # Prompt user for the month and day to filter by if they chose to filter by month and day by selecting 'both'
-    if userfilter == "both":
+    if userfilter in ["both", "month"]:
         while True:
             try:
                 usermonth = input('\nWhich month, January, February, March, April, May or June? Please type out the full month name or \'all\' for all.\n').lower()
@@ -170,51 +179,12 @@ def user_data_selection():
                     continue
             except ValueError as error:
                 print('Exception occurred:{}'.format(error))
-        while True:
-            try:
-                userday = input('\nWhich day, Mon, Tue, Wed, Thu, Fri , Sat or Sun? Type \'all\' to include all.\n').lower()
-                if userday in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']:
-                    break
-                elif userday == "all":
-                    break
-                else:
-                    print('\nSorry,{} is not a valid day selection'.format(userday))
-                    continue
-            except ValueError as error:
-                print('Exception occurred:{}'.format(error))
 
-    # Prompt user for the month to filter by if they chose to filter by month
-    elif userfilter == "month":
-        while True:
-            try:
-                usermonth = input('\nWhich month, January, February, March, April, May or June? Please type out the full month name or \'all\' for all.\n').lower()
-                if usermonth in ['january', 'february', 'march', 'april', 'may', 'june','all']:
-                    break
-                elif usermonth in ['july', 'august', 'september', 'october', 'november', 'december']:
-                    print('\n,{} \'s data is not available.'.format(usermonth))
-                    continue
-                elif usermonth == "all":
-                    break
-                else:
-                    print('\n{} is not a valid selection'.format(usermonth))
-                    continue
-            except ValueError as error:
-                print('Exception occurred:{}'.format(error))
-
-    # Prompt user for the day to filter by if they chose to filter by day
-    elif userfilter == "day":
-        while True:
-            try:
-                userday = input('\nWhich day, Mon, Tue, Wed, Thu, Fri , Sat or Sun? Type \'all\' to include all.\n').lower()
-                if userday in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'all']:
-                    break
-                elif userday == "all":
-                    break
-                else:
-                    print('\nSorry,{} is not a valid day selection'.format(userday))
-                    continue
-            except ValueError as error:
-                print('Exception occurred:{}'.format(error))
+    if userfilter in ["both", "day"]:
+        userday = getParam(
+        '\nWhich day, Mon, Tue, Wed, Thu, Fri , Sat or Sun? Type \'all\' to include all.\n',
+        '\nSorry,{} is not a valid day selection',
+        lambda v: v in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'all'])
 
     # Set userselection string which is used to load the dataframe with the locations and period selected by the user
     if userfilter == 'both':
@@ -242,6 +212,11 @@ print('\nMost popular day for journeys in: ' + str(usersel[0]).title() + '\n')
 print('During the period: ')
 print('\n  From: ' + str(df['Start Time'].iloc[0]))
 print('\n    To: ' + str(df['Start Time'].iloc[-1]))
+
+#Total number of journeys for the requested period
+start = time.time()
+print('\nTotal of journeys for this period:\n' + str(len(df.index)))
+print('\nThat took: ' + str(end - start) + 'seconds to execute.')
 
 # Most popular day of the week to start a journey
 print('\nJourneys by day of the week:\n')
