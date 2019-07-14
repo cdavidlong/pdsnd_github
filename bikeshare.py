@@ -7,7 +7,13 @@ Programming for data science
 
 Explore US Bikeshare Data Project submission
 
-Please refer to the readme.txt file included with this submission for reference sites consulted
+Reference sites consulted:
+
+Getting execution time of queries:
+https://stackoverflow.com/questions/1557571/how-do-i-get-time-of-a-python-programs-execution
+
+Converting seconds to weeks, days, hours, minutes, seconds
+https://stackoverflow.com/questions/4048651/python-function-to-convert-seconds-into-minutes-hours-and-days
 """
 
 import pandas as pd
@@ -237,6 +243,8 @@ df = load_data(usersel)
 end = time.time()
 print('\nThat took: ' + str(end - start) + 'seconds to load the dataframe.')
 
+# There follows a series of statistical results derived from the loaded dataset
+
 # Most popular day for a journey in the requested period
 print('\nMost popular day for journeys in: ' + str(usersel[0]).title() + '\n')
 print('During the period: ')
@@ -289,5 +297,5 @@ print('\nThe most popular station to end a journey for this period was: ' + str(
 end = time.time()
 print('\nThat took: ' + str(end - start) + 'seconds to execute.')
 
-# Prompt user if they would like to see raw data, 5 records at at time
+# Prompt user if they would like to see raw data, 5 records at at time, exit of the answer is No.
 display_raw_data(df, 5)
