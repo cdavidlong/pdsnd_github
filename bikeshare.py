@@ -7,7 +7,13 @@ Programming for data science
 
 Explore US Bikeshare Data Project submission
 
-Please refer to the readme.txt file included with this submission for reference sites consulted
+Reference sites consulted:
+
+Getting execution time of queries:
+https://stackoverflow.com/questions/1557571/how-do-i-get-time-of-a-python-programs-execution
+
+Converting seconds to weeks, days, hours, minutes, seconds
+https://stackoverflow.com/questions/4048651/python-function-to-convert-seconds-into-minutes-hours-and-days
 """
 
 import pandas as pd
