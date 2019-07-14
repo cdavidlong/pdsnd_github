@@ -133,7 +133,7 @@ def user_data_selection():
         day - name of the day of week to filter by, or "all" to apply no day filter
     """
     # Welcome message
-    print('\nHello and welcome to the bikeshare data anayzer!\n\nLet\'s explore some US bikeshare data.')
+    print('\nHello and welcome to the US Bikeshare Data analyzer!\n\nLet\'s explore some US bikeshare data.')
 
     # Prompt user for the city to analyze
     while True:
