@@ -80,7 +80,7 @@ def load_data(userselection):
     OUTPUT:
     df: pandas DataFrame containing city data filtered by month and day as requested by user
     """
-    print("\nLoading data for: {}".format(', '.join(userselection)))
+    print("\nData is now being loaded for: {}".format(', '.join(userselection)))
     city = userselection[0]
     month = userselection[1]
     if userselection[-1] != "all":
