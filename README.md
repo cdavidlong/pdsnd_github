@@ -5,7 +5,7 @@
 US Bikeshare Data Explorer
 
 ### Description
-Raw input is solicited from the user to create an interactive experience in the terminal and to present statistics relating to bike share systems for three major cities in the United States: Chicago, New York City, and Washington. Comma separated data files are imported based on user city selection and statistics relating to the data selection are presentedto the user in the terminal.
+Raw input is solicited from the user to create an interactive experience in the terminal and to present statistics relating to bike share systems for three major cities in the United States: Chicago, New York City, and Washington. Comma separated data files are imported based on user city selection and statistics relating to the data selection are presented to the user in the terminal.
 
 ### Files used
 * bikeshare.py        - Python script
